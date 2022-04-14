@@ -29,6 +29,18 @@ if (isset($_POST['submit'])) {
   } else {
     $body = filter_input(INPUT_POST, 'body', FILTER_SANITIZE_SPECIAL_CHARS);
   }
+
+  if (empty($nameErr) && empty($emailErr) && empty($bodyErr)) {
+    // Add to database
+
+    $sql = "INSERT INTO feedback (name, email, body) VALUES ('$name', '$emil', '$body')";
+
+    if (mysqli_query($conn, $sql)) {
+      header('Location: feedback.php');
+    } else {
+      echo 'Error' . mysqli_error($conn);
+    }
+  }
 }
 ?>
 
